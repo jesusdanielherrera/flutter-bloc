@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:in_driver_clone/src/presentacion/pages/auth/login/LoginContent.dart';
 
-class Logincontent extends StatelessWidget {
-  const Logincontent({Key? key}) : super(key: key);
+class RegisterContent extends StatelessWidget {
+  const RegisterContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+        body: Stack(
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
@@ -25,9 +26,9 @@ class Logincontent extends StatelessWidget {
                 child: Text(
                   "Log in",
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 25,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               RotatedBox(
@@ -36,6 +37,7 @@ class Logincontent extends StatelessWidget {
                   size: 20,
                   text: "Sign up",
                   color: Colors.white,
+                  fontweight: FontWeight.bold,
                 ),
               ),
               SizedBox(
@@ -54,45 +56,52 @@ class Logincontent extends StatelessWidget {
             ),
           ),
           child: Container(
-            margin: EdgeInsets.only(right: 25, left: 25),
+            margin: EdgeInsets.only(
+              right: 25,
+              left: 25,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Text(
-                  "Welcome",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "back...",
-                  style: TextStyle(
-                      fontSize: 28,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                Container(
+                  margin: EdgeInsets.only(top: 50),
+                  alignment: Alignment.bottomRight,
+                  child: GestureDetector(
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.close)),
+                  ),
                 ),
                 Container(
-                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(top: 20),
+                    alignment: Alignment.bottomCenter,
                     child: Image.asset(
-                      "assets/img/car.png",
+                      "assets/img/delivery.png",
                       width: 150,
                       height: 150,
                     )),
+                Spacer(),
                 Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.only(bottom: 50),
-                  child: Text(
-                    "Log in",
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  alignment: Alignment.center,
+                  child: TextForm(
+                    hintText: "Name",
+                    prefixIcon: Icon(Icons.person_2_outlined),
                   ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: TextForm(
+                    hintText: "Last name",
+                    prefixIcon: Icon(Icons.person_2_outlined),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
                   alignment: Alignment.center,
@@ -102,13 +111,33 @@ class Logincontent extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: TextForm(
+                    hintText: "Telefono",
+                    prefixIcon: Icon(Icons.phone_android_outlined),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
                   alignment: Alignment.center,
                   child: TextForm(
                     hintText: "Password",
-                    prefixIcon: Icon(Icons.key_outlined),
+                    prefixIcon: Icon(Icons.password_outlined),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: TextForm(
+                    hintText: "Confirmed password",
+                    prefixIcon: Icon(Icons.password_outlined),
                   ),
                 ),
                 Spacer(),
@@ -122,9 +151,10 @@ class Logincontent extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "SIGN IN",
+                      "CREATE ACCOUNT",
                       style: TextStyle(
                         color: Colors.blue,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -152,7 +182,7 @@ class Logincontent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      "Are you have an account?",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -160,10 +190,10 @@ class Logincontent extends StatelessWidget {
                     TextButton(
                       style: ButtonStyle(),
                       onPressed: () {
-                        Navigator.pushNamed(context, 'register');
+                        Navigator.pushNamed(context, 'login');
                       },
                       child: Text(
-                        "register",
+                        "Log in",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                       ),
@@ -178,61 +208,6 @@ class Logincontent extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class TextForm extends StatelessWidget {
-  const TextForm({
-    required this.prefixIcon,
-    required this.hintText,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget prefixIcon;
-  final String hintText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 275,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hintText,
-          border: InputBorder.none,
-          prefixIcon: prefixIcon,
-        ),
-      ),
-    );
-  }
-}
-
-class GlobalText extends StatelessWidget {
-  const GlobalText({
-    Key? key,
-    required this.text,
-    required this.size,
-    this.color,
-    this.fontweight,
-  }) : super(key: key);
-  final String text;
-  final double size;
-  final Color? color;
-  final FontWeight? fontweight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: size,
-        color: color,
-        fontWeight: fontweight,
-      ),
-    );
+    ));
   }
 }
